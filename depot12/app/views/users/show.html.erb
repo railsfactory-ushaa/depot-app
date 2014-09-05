@@ -1,0 +1,37 @@
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<% if (user_signed_in? && current_user.role == 'user') %>
+ <%=link_to "Edit Profile",edit_user_registration_path %><br />
+ <br />
+ <br />
+
+ <h2>Previous Order Info </h2>
+   <table border="1" >
+     <tr>
+     	<th>Name</th>
+     	<th>E-mail</th>
+     	<th>Pay_type</th>
+     </tr>
+    <% current_user.orders.each do |order| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+        <td><%= order.name %></td>	
+        <td><%= order.email %></td>
+        <td><%= order.pay_type %></td>
+
+     </tr>
+   <% end %>
+ </table>
+<% end %>
+<% if (user_signed_in? && current_user.role == 'admin') %>
+<%= link_to 'Edit', edit_user_registration_path %> |
+<%= link_to 'Back', users_path %>
+<% end %>
+
+
+
