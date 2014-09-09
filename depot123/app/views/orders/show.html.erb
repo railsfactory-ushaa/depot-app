@@ -1,0 +1,25 @@
+<table>
+	<tr>
+     <th>Product name</th>
+     <th>Quantity</th>
+     <th>Price</th>
+    </tr>
+    <% @arr = Array.new %>
+
+    <% @order.line_items.each do |product| %>
+    <tr>
+    <td><%= product.product.title%></td>
+    <td><%=product.quantity%></td>
+    <% @arr << product.total_price %>
+    <td><%=number_to_currency(product.total_price) %><br/></td>
+    <% end %>
+	</tr>
+   <% $sum = @arr.sum %>
+   <tr>
+   	<td><h6>Total</h6></td>
+   	<td></td>
+   	<td colspan = "2"><h6><%= number_to_currency($sum) %></h6></td>
+   </tr>
+</table>
+
+
